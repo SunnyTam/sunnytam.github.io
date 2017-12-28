@@ -17,4 +17,4 @@ getting-started:
 golang:
   name: golang
   description: A series of Golang tech log
-  cover: asserts/images/golang.jpg
+  cover: /asserts/images/golang.jpg

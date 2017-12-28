@@ -35,11 +35,10 @@ google_analytics: UA-69281367-1 # replace by your GA id
 # Permalinks
 permalink: /:title
 # permalink: /author/:author
-permalink: /tag/:path
-# collections:
-#   tag:
-#     output: true
-#     permalink: /tag/:path
+collections:
+  tag:
+    output: true
+    permalink: /tag/:path
 
 # Authors' info in `_data/authors.yml`
 # Tags' info in `_data/tags_info.yml`

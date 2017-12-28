@@ -3,11 +3,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
    {% if page.grouptype == 'category' %}
-      <title>{{ site.url }}{{ site.baseurl }} - Category: {{ page.category }}</title>
+      <title>{{ site.url }}/{{ site.baseurl }} - Category: {{ page.category }}</title>
    {% else %}
-      <title>{{ site.url }}{{ site.baseurl }}</title>
+      <title>{{ site.url }}/{{ site.baseurl }}</title>
    {% endif %}
-   <link>{{ site.url }}{{ site.baseurl }}</link>
+   <link>{{ site.url }}/{{ site.baseurl }}</link>
    <description>{{ site.description }}</description>
    <language>{{ site.language }}</language>
    {% if page.author %}
@@ -25,15 +25,15 @@
    <description>
    <![CDATA[ {{ site.description }} ]]>
    </description>
-   <link>{{ site.url }}{{ site.baseurl }}</link>
+   <link>{{ site.url }}/{{ site.baseurl }}</link>
    <image>
-   <url>{{ site.url }}{{ site.baseurl }}{{ site.favicon }}</url>
+   <url>{{ site.url }}/{{ site.baseurl }}{{ site.favicon }}</url>
    <title>{% if author_name %}{{ author_name }} - {% endif %}{{ site.title }}</title>
-   <link>{{ site.url }}{{ site.baseurl }}</link>
+   <link>{{ site.url }}/{{ site.baseurl }}</link>
    </image>
    <generator>Jekyll 3.6.2</generator>
    <lastBuildDate>{{ post.date | date_to_xmlschema }}</lastBuildDate>
-   <atom:link href="{{ site.url }}{{ site.baseurl }}{% if author_name %}author/{{ author_username }}/{% endif %}rss.xml" rel="self" type="application/rss+xml"/>
+   <atom:link href="{{ site.url }}/{{ site.baseurl }}{% if author_name %}author/{{ author_username }}/{% endif %}rss.xml" rel="self" type="application/rss+xml"/>
    <ttl>60</ttl>
    <atom:link href="rss" rel="self" type="application/rss+xml" />
    {{ content }}

@@ -3,9 +3,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
    
-      <title>/</title>
+      <title>//</title>
    
-   <link>/</link>
+   <link>//</link>
    <description>A Blog for logging tech</description>
    <language>en-uk</language>
    
@@ -15,21 +15,21 @@
    <description>
    <![CDATA[ A Blog for logging tech ]]>
    </description>
-   <link>/</link>
+   <link>//</link>
    <image>
-   <url>//assets/images/favicon.png</url>
+   <url>///assets/images/favicon.png</url>
    <title>TechLog</title>
-   <link>/</link>
+   <link>//</link>
    </image>
    <generator>Jekyll 3.6.2</generator>
    <lastBuildDate></lastBuildDate>
-   <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
+   <atom:link href="//rss.xml" rel="self" type="application/rss+xml"/>
    <ttl>60</ttl>
    <atom:link href="rss" rel="self" type="application/rss+xml" />
    
 	<item>
 	  <title>Study on using both BelongsTo and Have One Relationship in Gorm</title>
-	  <link>/tag2017-12-27-Gorm-belongs-to-have-one</link>
+	  <link>//Gorm-belongs-to-have-one</link>
 		
 				
 						<author>Sunny Tam</author>
@@ -50,7 +50,7 @@
 				
 		
 	  <pubDate>2017-12-28T22:45:00+08:00</pubDate>
-	  <guid>/tag2017-12-27-Gorm-belongs-to-have-one</guid>
+	  <guid>//Gorm-belongs-to-have-one</guid>
 	  <description><![CDATA[
 	     <h1 id="study-on-using-both-belongsto-and-have-one-relationship-in-gorm">Study on using both BelongsTo and Have One Relationship in Gorm</h1>
 

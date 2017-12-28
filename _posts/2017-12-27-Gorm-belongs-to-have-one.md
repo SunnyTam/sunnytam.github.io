@@ -1,7 +1,7 @@
 ---
 layout: post
 current: post
-cover:  assets/images/golang.jpg
+cover:  /assets/images/golang.jpg
 navigation: True
 title: Study on using both BelongsTo and Have One Relationship in Gorm
 date: 2017-12-28 14:45:00

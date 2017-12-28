@@ -31,10 +31,10 @@
                     {% for author in site.data.authors %}
                         {% if author[1].username == post.author %}
                             {% if author[1].picture %}
-                            <img class="author-profile-image" src="{{ site.url }}{{ site.baseurl }}{{ author[1].picture }}/" alt="{{ author[1].name }}" />
+                            <img class="author-profile-image" src="{{ site.url }}{{ site.baseurl }}/{{ author[1].picture }}/" alt="{{ author[1].name }}" />
                             {% endif %}
                             <span class="post-card-author">
-                                <a href="{{ site.url }}{{ site.baseurl }}author/{{ post.author }}/">{{ author[1].name }}</a>
+                                <a href="{{ site.url }}{{ site.baseurl }}/author/{{ post.author }}/">{{ author[1].name }}</a>
                             </span>
                         {% endif %}
                     {% endfor %}

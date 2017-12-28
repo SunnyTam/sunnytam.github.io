@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title> - Articles</title>
+    <description>A Blog for logging tech</description>
+    <link>
+    </link>
+    
+      
+      <item>
+        <title>Study on using both BelongsTo and Have One Relationship in Gorm</title>
+        
+          <description>&lt;h1 id=&quot;study-on-using-both-belongsto-and-have-one-relationship-in-gorm&quot;&gt;Study on using both BelongsTo and Have One Relationship in Gorm&lt;/h1&gt;
+
+</description>
+        
+        <pubDate>Thu, 28 Dec 2017 14:45:00 +0000</pubDate>
+        <link>
+        /Gorm-belongs-to-have-one</link>
+        <guid isPermaLink="true">/Gorm-belongs-to-have-one</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Welcome to Sunny's TechLog</title>
+        
+          <description>&lt;p&gt;Hi, Welcome all of you.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 25 Nov 2017 01:29:00 +0000</pubDate>
+        <link>
+        /First</link>
+        <guid isPermaLink="true">/First</guid>
+      </item>
+      
+    
+  </channel>
+</rss>

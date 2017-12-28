@@ -71,7 +71,7 @@ username: SunnyTam
 repo: SunnyTam.github.io
 branch: master
 relative_source: ../jasper2/
-destination: ../jasper2-pages/
+destination: ./_site/
 production_url:  https://SunnyTam.github.io/
 source_url:  https://github.com/SunnyTam/SunnyTam.github.io/
 

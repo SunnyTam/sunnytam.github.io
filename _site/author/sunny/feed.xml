@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+   
+      <title>/</title>
+   
+   <link>/</link>
+   <description>A Blog for logging tech</description>
+   <language>en-uk</language>
+   
+      
+            
+               
+               
+                  <managingEditor>Sunny Tam</managingEditor>
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+   
+   <title>
+   <![CDATA[ Sunny Tam - TechLog ]]>
+   </title>
+   <description>
+   <![CDATA[ A Blog for logging tech ]]>
+   </description>
+   <link>/</link>
+   <image>
+   <url>/assets/images/favicon.png</url>
+   <title>Sunny Tam - TechLog</title>
+   <link>/</link>
+   </image>
+   <generator>Jekyll 3.6.2</generator>
+   <lastBuildDate></lastBuildDate>
+   <atom:link href="/author/sunny/rss.xml" rel="self" type="application/rss+xml"/>
+   <ttl>60</ttl>
+   <atom:link href="rss" rel="self" type="application/rss+xml" />
+   
+	<item>
+	  <title>Study on using both BelongsTo and Have One Relationship in Gorm</title>
+	  <link>/Gorm-belongs-to-have-one</link>
+		
+				
+						<author>Sunny Tam</author>
+				
+		
+				
+		
+				
+		
+				
+		
+				
+		
+				
+		
+				
+		
+				
+		
+	  <pubDate>2017-12-28T22:45:00+08:00</pubDate>
+	  <guid>/Gorm-belongs-to-have-one</guid>
+	  <description><![CDATA[
+	     <h1 id="study-on-using-both-belongsto-and-have-one-relationship-in-gorm">Study on using both BelongsTo and Have One Relationship in Gorm</h1>
+
+<h2 id="the-problem-using-both-belongsto-and-haveone">The Problem using both BelongsTo and HaveOne</h2>
+
+<p>Base on offical Gorm website, you can define your <strong>BelongsTo</strong> relationship like this</p>
+<div class="language-golang highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// `User` belongs to `Profile`, `ProfileID` is the foreign key</span><span class="x">
+</span><span class="k">type</span><span class="x"> </span><span class="n">User</span><span class="x"> </span><span class="k">struct</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">gorm</span><span class="o">.</span><span class="n">Model</span><span class="x">
+  </span><span class="n">Profile</span><span class="x">   </span><span class="n">Profile</span><span class="x">
+  </span><span class="n">ProfileID</span><span class="x"> </span><span class="kt">int</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">type</span><span class="x"> </span><span class="n">Profile</span><span class="x"> </span><span class="k">struct</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">gorm</span><span class="o">.</span><span class="n">Model</span><span class="x">
+  </span><span class="n">Name</span><span class="x"> </span><span class="kt">string</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="o">&amp;</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">Related</span><span class="p">(</span><span class="o">&amp;</span><span class="n">profile</span><span class="p">)</span><span class="x">
+</span><span class="c">//// SELECT * FROM profiles WHERE id = 111; // 111 is user's foreign key ProfileID</span><span class="x">
+</span></code></pre></div></div>
+
+<p>And if you want to have <strong>HaveOne</strong> relationship. you can do this</p>
+
+<div class="language-golang highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// User has one CreditCard, UserID is the foreign key</span><span class="x">
+</span><span class="k">type</span><span class="x"> </span><span class="n">User</span><span class="x"> </span><span class="k">struct</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">gorm</span><span class="o">.</span><span class="n">Model</span><span class="x">
+    </span><span class="n">CreditCard</span><span class="x">   </span><span class="n">CreditCard</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">type</span><span class="x"> </span><span class="n">CreditCard</span><span class="x"> </span><span class="k">struct</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">gorm</span><span class="o">.</span><span class="n">Model</span><span class="x">
+    </span><span class="n">UserID</span><span class="x">   </span><span class="kt">uint</span><span class="x">
+    </span><span class="n">Number</span><span class="x">   </span><span class="kt">string</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="o">&amp;</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">Related</span><span class="p">(</span><span class="o">&amp;</span><span class="n">card</span><span class="p">)</span><span class="x">
+</span></code></pre></div></div>
+
+<p>But the offical website do not tell you how to do <strong>BelongsTo</strong> and <strong>HaveOne</strong> together cause if you doing like this will trigger a panic in golang due to the infinity recursive struct. <code class="highlighter-rouge">User</code> will try to have a <code class="highlighter-rouge">Profile</code> Struct and the inner <code class="highlighter-rouge">Profile</code> will contain <code class="highlighter-rouge">User</code> struct</p>
+
+<div class="language-golang highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span><span class="x"> </span><span class="n">User</span><span class="x"> </span><span class="k">struct</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">gorm</span><span class="o">.</span><span class="n">Model</span><span class="x">
+  </span><span class="n">Profile</span><span class="x">   </span><span class="n">Profile</span><span class="x">
+  </span><span class="n">ProfileID</span><span class="x"> </span><span class="kt">int</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">type</span><span class="x"> </span><span class="n">Profile</span><span class="x"> </span><span class="k">struct</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">gorm</span><span class="o">.</span><span class="n">Model</span><span class="x">
+  </span><span class="n">Name</span><span class="x"> </span><span class="kt">string</span><span class="x">
+  </span><span class="n">User</span><span class="x">  </span><span class="n">User</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="o">&amp;</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">Related</span><span class="p">(</span><span class="o">&amp;</span><span class="n">user</span><span class="o">.</span><span class="n">Profile</span><span class="p">)</span><span class="x">
+</span></code></pre></div></div>
+
+<h2 id="track-to-use-belongsto-and-haveone-together">Track to use BelongsTo and HaveOne together</h2>
+
+<p>The track you need to do is use pointer in both <code class="highlighter-rouge">User</code> and <code class="highlighter-rouge">Profile</code> struct. This pointer avoid an infinity recursive struct</p>
+<div class="language-golang highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span><span class="x"> </span><span class="n">User</span><span class="x"> </span><span class="k">struct</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">gorm</span><span class="o">.</span><span class="n">Model</span><span class="x">
+  </span><span class="n">Profile</span><span class="x">   </span><span class="o">*</span><span class="n">Profile</span><span class="x">  </span><span class="c">//using pointer instead</span><span class="x">
+  </span><span class="n">ProfileID</span><span class="x"> </span><span class="kt">int</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">type</span><span class="x"> </span><span class="n">Profile</span><span class="x"> </span><span class="k">struct</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">gorm</span><span class="o">.</span><span class="n">Model</span><span class="x">
+  </span><span class="n">Name</span><span class="x"> </span><span class="kt">string</span><span class="x">
+  </span><span class="n">User</span><span class="x">  </span><span class="o">*</span><span class="n">User</span><span class="x"> </span><span class="c">//using pointer instead</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="n">user</span><span class="o">.</span><span class="n">Profile</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="o">&amp;</span><span class="n">Profile</span><span class="p">{}</span><span class="x"> </span><span class="c">// let the pointer point to a new Profile</span><span class="x">
+</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="o">&amp;</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">Related</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">Profile</span><span class="p">)</span><span class="x"> </span><span class="c">// pass the pointer to related directly</span><span class="x">
+</span><span class="n">user</span><span class="o">.</span><span class="n">Profile</span><span class="o">.</span><span class="n">User</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="o">&amp;</span><span class="n">user</span><span class="x"> </span><span class="c">// this will create a reference back to the Profile object. </span><span class="x">
+
+</span><span class="n">db</span><span class="o">.</span><span class="n">Save</span><span class="p">(</span><span class="o">&amp;</span><span class="n">user</span><span class="p">)</span><span class="x"> </span><span class="c">// this will trigger a panic from infinity recursive update</span><span class="x">
+</span></code></pre></div></div>
+
+<p>This will work fine in get query. But this will create an infinity update between <code class="highlighter-rouge">Profile</code> and <code class="highlighter-rouge">User</code>. My solution is to <code class="highlighter-rouge">gorm:"save_associations:false"</code> after one field. For example.</p>
+
+<div class="language-golang highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span><span class="x"> </span><span class="n">User</span><span class="x"> </span><span class="k">struct</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">gorm</span><span class="o">.</span><span class="n">Model</span><span class="x">
+  </span><span class="n">Profile</span><span class="x">   </span><span class="o">*</span><span class="n">Profile</span><span class="x">
+  </span><span class="n">ProfileID</span><span class="x"> </span><span class="kt">int</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">type</span><span class="x"> </span><span class="n">Profile</span><span class="x"> </span><span class="k">struct</span><span class="x"> </span><span class="p">{</span><span class="x">
+  </span><span class="n">gorm</span><span class="o">.</span><span class="n">Model</span><span class="x">
+  </span><span class="n">Name</span><span class="x"> </span><span class="kt">string</span><span class="x">
+  </span><span class="n">User</span><span class="x">  </span><span class="o">*</span><span class="n">User</span><span class="x"> </span><span class="s">`gorm:"save_associations:false"`</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="n">user</span><span class="o">.</span><span class="n">Profile</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="o">&amp;</span><span class="n">Profile</span><span class="p">{}</span><span class="x"> 
+</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="o">&amp;</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">Related</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">Profile</span><span class="p">)</span><span class="x">
+</span><span class="n">user</span><span class="o">.</span><span class="n">Profile</span><span class="o">.</span><span class="n">User</span><span class="x"> </span><span class="o">=</span><span class="x"> </span><span class="o">&amp;</span><span class="n">user</span><span class="x">
+
+</span><span class="n">db</span><span class="o">.</span><span class="n">Save</span><span class="p">(</span><span class="o">&amp;</span><span class="n">user</span><span class="p">)</span><span class="x"> </span><span class="c">// this nested save will work. Saving both user and profile</span><span class="x">
+</span><span class="n">db</span><span class="o">.</span><span class="n">Save</span><span class="p">(</span><span class="o">&amp;</span><span class="n">user</span><span class="o">.</span><span class="n">Profile</span><span class="p">)</span><span class="x"> </span><span class="c">// this save will work with only saving profile data</span><span class="x">
+</span></code></pre></div></div>
+
+	  ]]></description>
+	</item>
+
+	<item>
+	  <title>Welcome to Sunny's TechLog</title>
+	  <link>/First</link>
+		
+				
+						<author>Sunny Tam</author>
+				
+		
+				
+		
+				
+		
+				
+		
+				
+		
+				
+		
+				
+		
+				
+		
+	  <pubDate>2017-11-25T09:29:00+08:00</pubDate>
+	  <guid>/First</guid>
+	  <description><![CDATA[
+	     <p>Hi, Welcome all of you.</p>
+
+<p>This is my first page of TechLog. I will try post my tech study on this page for logging purpose.</p>
+
+<p>There are few things I might interested to log it back later.</p>
+
+<ul>
+  <li>fun in react</li>
+  <li>study on golang</li>
+  <li>how to make php code look good</li>
+</ul>
+
+	  ]]></description>
+	</item>
+
+
+</channel>
+</rss>

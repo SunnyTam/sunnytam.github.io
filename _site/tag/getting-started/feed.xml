@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+   
+      <title>/</title>
+   
+   <link>/</link>
+   <description>A Blog for logging tech</description>
+   <language>en-uk</language>
+   
+   <title>
+   <![CDATA[ TechLog ]]>
+   </title>
+   <description>
+   <![CDATA[ A Blog for logging tech ]]>
+   </description>
+   <link>/</link>
+   <image>
+   <url>/assets/images/favicon.png</url>
+   <title>TechLog</title>
+   <link>/</link>
+   </image>
+   <generator>Jekyll 3.6.2</generator>
+   <lastBuildDate></lastBuildDate>
+   <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
+   <ttl>60</ttl>
+   <atom:link href="rss" rel="self" type="application/rss+xml" />
+   
+	<item>
+	  <title>Welcome to Sunny's TechLog</title>
+	  <link>/First</link>
+		
+				
+						<author>Sunny Tam</author>
+				
+		
+				
+		
+				
+		
+				
+		
+				
+		
+				
+		
+				
+		
+				
+		
+	  <pubDate>2017-11-25T09:29:00+08:00</pubDate>
+	  <guid>/First</guid>
+	  <description><![CDATA[
+	     <p>Hi, Welcome all of you.</p>
+
+<p>This is my first page of TechLog. I will try post my tech study on this page for logging purpose.</p>
+
+<p>There are few things I might interested to log it back later.</p>
+
+<ul>
+  <li>fun in react</li>
+  <li>study on golang</li>
+  <li>how to make php code look good</li>
+</ul>
+
+	  ]]></description>
+	</item>
+
+
+</channel>
+</rss>
